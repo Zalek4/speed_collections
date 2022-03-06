@@ -1,7 +1,8 @@
 import bpy
-from .op_bake_organizer import SPEEDSEAMS_OT_PairHighLowObjects, SPEEDSEAMS_OT_OrganizeHighLowCollections, SPEEDSEAMS_OT_SortHighObjects, SPEEDSEAMS_OT_SortLowObjects
+from .op_bake_organizer import SPEEDCOLLECTIONS_OT_PairHighLowObjects, SPEEDCOLLECTIONS_OT_OrganizeHighLowCollections, SPEEDCOLLECTIONS_OT_SortHighObjects, SPEEDCOLLECTIONS_OT_SortLowObjects
 
-classes = (SPEEDSEAMS_OT_PairHighLowObjects, SPEEDSEAMS_OT_OrganizeHighLowCollections, SPEEDSEAMS_OT_SortHighObjects, SPEEDSEAMS_OT_SortLowObjects)
+classes = (SPEEDCOLLECTIONS_OT_PairHighLowObjects, SPEEDCOLLECTIONS_OT_OrganizeHighLowCollections,
+           SPEEDCOLLECTIONS_OT_SortHighObjects, SPEEDCOLLECTIONS_OT_SortLowObjects)
 
 
 def register_operators():

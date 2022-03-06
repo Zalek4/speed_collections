@@ -1,8 +1,8 @@
 import bpy
-from .panels import SPEEDSEAMS_PT_MainPanel
-from .pies import SPEEDSEAMS_MT_HighLowPie
+from .panels import SPEEDCOLLECTIONS_PT_MainPanel
+from .pies import SPEEDCOLLECTIONS_MT_HighLowPie
 
-classes = (SPEEDSEAMS_PT_MainPanel, SPEEDSEAMS_MT_HighLowPie)
+classes = (SPEEDCOLLECTIONS_PT_MainPanel, SPEEDCOLLECTIONS_MT_HighLowPie)
 
 
 def register_menus():

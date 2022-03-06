@@ -11,7 +11,7 @@ from bpy.props import (StringProperty,
                        EnumProperty,
                        PointerProperty,
                        )
-from .menus.pies import SPEEDSEAMS_MT_HighLowPie
+from .menus.pies import SPEEDCOLLECTIONS_MT_HighLowPie
 
 bl_info = {
     "name": "Speed Collections",
@@ -87,7 +87,7 @@ def register():
     km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
 
     kmi_high_low_pie = km.keymap_items.new("wm.call_menu_pie", "C", "PRESS", shift=True)
-    kmi_high_low_pie.properties.name = SPEEDSEAMS_MT_HighLowPie.bl_idname
+    kmi_high_low_pie.properties.name = SPEEDCOLLECTIONS_MT_HighLowPie.bl_idname
 
     addon_keymaps.append((km, kmi_high_low_pie))
 

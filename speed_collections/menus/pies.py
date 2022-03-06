@@ -6,7 +6,8 @@ from bpy.types import Menu
 from bpy.props import StringProperty, IntProperty, BoolProperty, FloatProperty, EnumProperty
 from ..operators import op_bake_organizer
 
-class SPEEDSEAMS_MT_HighLowPie(Menu):
+
+class SPEEDCOLLECTIONS_MT_HighLowPie(Menu):
     bl_label = "Sort High/Low"
     bl_idname = "SPEEDSEAMS_MT_HighLowPie"
     bl_category = "Speed Seams"
@@ -18,6 +19,6 @@ class SPEEDSEAMS_MT_HighLowPie(Menu):
         pie = layout.menu_pie()
 
         pie.operator(
-            op_bake_organizer.SPEEDSEAMS_OT_SortHighObjects.bl_idname, icon='PLUS')
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_SortHighObjects.bl_idname, icon='PLUS')
         pie.operator(
-            op_bake_organizer.SPEEDSEAMS_OT_SortLowObjects.bl_idname, icon='PLUS')
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_SortLowObjects.bl_idname, icon='PLUS')

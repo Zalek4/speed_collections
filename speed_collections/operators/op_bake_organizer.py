@@ -14,7 +14,7 @@ import random
 #    Classes
 # ------------------------------------------------------------------------
 
-class SPEEDSEAMS_OT_OrganizeHighLowCollections(bpy.types.Operator):
+class SPEEDCOLLECTIONS_OT_OrganizeHighLowCollections(bpy.types.Operator):
     bl_idname = "create.high_low_collections"
     bl_label = "Organize High/Low Collections"
     bl_description = "Sets up bake collections for high/low object sets"
@@ -118,7 +118,8 @@ class SPEEDSEAMS_OT_OrganizeHighLowCollections(bpy.types.Operator):
 
         return {'FINISHED'}
 
-class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
+
+class SPEEDCOLLECTIONS_OT_PairHighLowObjects(bpy.types.Operator):
     bl_idname = "pair.high_low_objects"
     bl_label = "Pair High/Low Meshes"
     bl_description = "Pairs high/low objects based on the amount they overlap"
@@ -419,7 +420,8 @@ class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
 
         return{'FINISHED'}
 
-class SPEEDSEAMS_OT_SortHighObjects(bpy.types.Operator):
+
+class SPEEDCOLLECTIONS_OT_SortHighObjects(bpy.types.Operator):
     bl_idname = "sort.high_objects"
     bl_label = "Add to HP collection"
     bl_description = "Adds the selected objects to the Highpoly collection of current bake group"
@@ -461,7 +463,8 @@ class SPEEDSEAMS_OT_SortHighObjects(bpy.types.Operator):
 
         return {'FINISHED'}
 
-class SPEEDSEAMS_OT_SortLowObjects(bpy.types.Operator):
+
+class SPEEDCOLLECTIONS_OT_SortLowObjects(bpy.types.Operator):
     bl_idname = "sort.low_objects"
     bl_label = "Add to LP collection"
     bl_description = "Adds the selected objects to the Lowpoly collection of current bake group"

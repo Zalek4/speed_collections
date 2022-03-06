@@ -10,7 +10,8 @@ from ..operators import op_bake_organizer
 #    Classes
 # ------------------------------------------------------------------------
 
-class SPEEDSEAMS_PT_MainPanel(bpy.types.Panel):
+
+class SPEEDCOLLECTIONS_PT_MainPanel(bpy.types.Panel):
     bl_label = "Speed Collections"
     bl_idname = "SPEEDSEAMS_PT_mainPanel"
     bl_category = "Speed Collections"
@@ -62,17 +63,21 @@ class SPEEDSEAMS_PT_MainPanel(bpy.types.Panel):
 
         row = col.row(align=True)
         row.scale_y = scale
-        row.operator(op_bake_organizer.SPEEDSEAMS_OT_OrganizeHighLowCollections.bl_idname, icon='NEWFOLDER')
+        row.operator(
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_OrganizeHighLowCollections.bl_idname, icon='NEWFOLDER')
 
         row = col.row(align=True)
         row.scale_y = scale
-        row.operator(op_bake_organizer.SPEEDSEAMS_OT_SortHighObjects.bl_idname, icon='PLUS')
-        row.operator(op_bake_organizer.SPEEDSEAMS_OT_SortLowObjects.bl_idname, icon='PLUS')
+        row.operator(
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_SortHighObjects.bl_idname, icon='PLUS')
+        row.operator(
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_SortLowObjects.bl_idname, icon='PLUS')
         col.separator()
 
         row = col.row(align=True)
         row.scale_y = scale
-        row.operator(op_bake_organizer.SPEEDSEAMS_OT_PairHighLowObjects.bl_idname, icon='UV_SYNC_SELECT')
+        row.operator(
+            op_bake_organizer.SPEEDCOLLECTIONS_OT_PairHighLowObjects.bl_idname, icon='UV_SYNC_SELECT')
 
         row = col.row(align=True)
         row.scale_y = scale
