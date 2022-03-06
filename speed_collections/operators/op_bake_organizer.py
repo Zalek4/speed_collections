@@ -21,10 +21,10 @@ class SPEEDSEAMS_OT_OrganizeHighLowCollections(bpy.types.Operator):
 
     def execute(self, context):
         scene = context.scene
-        ss = scene.ss_settings
-        bg_name = ss.bakePrepAssetName + "_" + "bake_group"
-        bg_low_name = ss.bakePrepAssetName + "_" + ss.bakePrepSuffixLow
-        bg_high_name = ss.bakePrepAssetName + "_" + ss.bakePrepSuffixHigh
+        sc = scene.sc_settings
+        bg_name = sc.bakePrepAssetName + "_" + "bake_group"
+        bg_low_name = sc.bakePrepAssetName + "_" + sc.bakePrepSuffixLow
+        bg_high_name = sc.bakePrepAssetName + "_" + sc.bakePrepSuffixHigh
 
         # Get all collections of the scene and their parents in a dict
         coll_scene = bpy.context.scene.collection
@@ -113,8 +113,8 @@ class SPEEDSEAMS_OT_OrganizeHighLowCollections(bpy.types.Operator):
                 bg_low_collection = bpy.data.collections.new(bg_low_name)
                 bg_collection.children.link(bg_low_collection)
 
-        scene.ss_collection_high = bg_high_collection
-        scene.ss_collection_low = bg_low_collection
+        scene.sc_collection_high = bg_high_collection
+        scene.sc_collection_low = bg_low_collection
 
         return {'FINISHED'}
 
@@ -331,6 +331,10 @@ class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
             #Remove duplicate matches from match lists
             lowMatched = list(dict.fromkeys(lowMatched))
             highMatched = list(dict.fromkeys(highMatched))
+            highErrors = []
+            lowErrors = []
+            print(str(lowMatched))
+            print(str(highMatched))
 
             #Set up for loop variables
             meshMatchIndex = 0
@@ -338,27 +342,26 @@ class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
 
             #Move highpoly objects that weren't matched to an 'UNMATCHED' collection
             for highObject in bg_high_collection.all_objects:
-                collectionSize = len(bg_high_collection.all_objects)
-                if collSizeIndex >= collectionSize:
-                    break
                 if highObject in highMatched:
-                    meshMatchIndex = meshMatchIndex + 1
-                    pass
+                    print(str(highObject.name) + " already matched. Skipping...")
                 else:
-                    print("Moving unmatched highpoly meshes...")
+                    #print("Moving unmatched highpoly meshes...")
                     bg_high_unmatched_collection = bpy.data.collections.get(bg_high_unmatched_name)
                     if bg_high_unmatched_collection:
                         for coll in highObject.users_collection:
                             coll.objects.unlink(highObject)
                         bg_high_unmatched_collection.objects.link(highObject)
+                        highErrors.append(highObject)
                     else:
                         bg_high_unmatched_collection = bpy.data.collections.new(bg_high_unmatched_name)
                         bg_high_collection.children.link(bg_high_unmatched_collection)
                         for coll in highObject.users_collection:
                             coll.objects.unlink(highObject)
                         bg_high_unmatched_collection.objects.link(highObject)
+                        highErrors.append(highObject)
+                #time.sleep(0.05)
 
-            if len(highMatched) < collectionSize:
+            if len(highMatched) < len(bg_high_collection.all_objects):
                 highpolysMatch = False
             else:
                 highpolysMatch = True
@@ -370,27 +373,26 @@ class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
 
             #Move highpoly objects that weren't matched to an 'UNMATCHED' collection
             for lowObject in bg_low_collection.all_objects:
-                collectionSize = len(bg_low_collection.all_objects)
-                if collSizeIndex >= collectionSize:
-                    break
                 if lowObject in lowMatched:
-                    meshMatchIndex = meshMatchIndex + 1
-                    pass
+                    print(str(lowObject.name) + " already matched. Skipping...")
                 else:
-                    print("Moving unmatched lowpoly meshes...")
+                    #print("Moving unmatched lowpoly meshes...")
                     bg_low_unmatched_collection = bpy.data.collections.get(bg_low_unmatched_name)
                     if bg_low_unmatched_collection:
                         for coll in lowObject.users_collection:
                             coll.objects.unlink(lowObject)
                         bg_low_unmatched_collection.objects.link(lowObject)
+                        lowErrors.append(lowObject)
                     else:
                         bg_low_unmatched_collection = bpy.data.collections.new(bg_low_unmatched_name)
                         bg_low_collection.children.link(bg_low_unmatched_collection)
                         for coll in lowObject.users_collection:
                             coll.objects.unlink(lowObject)
                         bg_low_unmatched_collection.objects.link(lowObject)
+                        lowErrors.append(lowObject)
+                #time.sleep(0.05)
 
-            if len(lowMatched) < collectionSize:
+            if len(lowMatched) < len(bg_low_collection.all_objects):
                 lowpolysMatch = False
             else:
                 lowpolysMatch = True
@@ -401,6 +403,9 @@ class SPEEDSEAMS_OT_PairHighLowObjects(bpy.types.Operator):
                 self.report({'INFO'}, "ALL MESHES MATCHED")
             else:
                 self.report({'WARNING'}, "NO MATCH FOUND FOR SOME MESHES")
+
+            print(str(highErrors))
+            print(str(lowErrors))
 
             #Unhide everything
             for lowObject in bg_low_collection.all_objects:
